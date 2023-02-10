@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Chat Gpt Scroll Extension",
+  "version": "0.1.0",
+  "description": "List Down Chat Gpt Question",
+  "content_scripts": [
+    {
+      "matches": ["https://chat.openai.com/chat/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": ["tabs", "webNavigation", "activeTab"]
+}
