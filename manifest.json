@@ -1,14 +1,16 @@
 {
   "manifest_version": 3,
-  "name": "Chat Gpt Scroll Extension",
-  "version": "0.1.0",
-  "description": "List Down Chat Gpt Question",
+  "name": "ChatGPT Scroll To View",
+  "description": "Scroll to your question in ChatGPT",
+  "version": "0.0.1",
+  "author": "Zahid",
+  "icons": {
+    "48": "icons/48.png"
+  },
   "content_scripts": [
     {
-      "matches": ["https://chat.openai.com/chat/*"],
-      "js": ["content.js"],
-      "run_at": "document_end"
+      "matches": ["https://chat.openai.com/*"],
+      "js": ["content_script.js"]
     }
-  ],
-  "permissions": ["tabs", "webNavigation", "activeTab"]
+  ]
 }
