@@ -23,7 +23,7 @@ const init = () => {
 
 const isResponseGenerating = () => {
   const inConversation = document.querySelector("form button");
-  if (inConversation.innerText === "Stop generating") {
+  if (inConversation?.innerText === "Stop generating") {
     return true;
   }
   return false;
