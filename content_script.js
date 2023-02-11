@@ -1,6 +1,7 @@
 let items = [];
 let currentPage = 0;
 let showPages = 10;
+let generateResponse = -1;
 
 const init = () => {
   if (window.buttonsInterval) {
@@ -14,10 +15,18 @@ const init = () => {
     if (shouldAddPagination()) {
       main();
     }
-    if (shouldRemovePagination()) {
+    if (shouldRemovePagination() || isResponseGenerating()) {
       removeButtons();
     }
   }, 1000);
+};
+
+const isResponseGenerating = () => {
+  const inConversation = document.querySelector("form button");
+  if (inConversation.innerText === "Stop generating") {
+    return true;
+  }
+  return false;
 };
 
 const main = () => {
@@ -161,7 +170,7 @@ const shouldAddPagination = () => {
 const removeButtons = () => {
   const pagination = document.querySelector(".pagination");
   resetVariable();
-  while (pagination !== null) {
+  if (pagination !== null) {
     pagination.remove();
     resetVariable();
   }
