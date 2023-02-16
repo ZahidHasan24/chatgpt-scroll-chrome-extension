@@ -169,8 +169,8 @@ const createPaginationList = () => {
     li.addEventListener("click", scrollToView);
     li.setAttribute(
       "tooltip",
-      questionList[item - 1]?.length > 67
-        ? `${questionList[item - 1].slice(0, 64)}...`
+      questionList[item - 1]?.length > 65
+        ? `${questionList[item - 1].slice(0, 61)}...`
         : questionList[item - 1]
     );
     li.setAttribute("flow", "up");
@@ -231,8 +231,8 @@ const handlePagination = (isNext) => {
     innerLi.param = `.question-${slicedItems[i]}`;
     innerLi.setAttribute(
       "tooltip",
-      questionList[slicedItems[i] - 1]?.length > 67
-        ? `${questionList[slicedItems[i] - 1].slice(0, 64)}...`
+      questionList[slicedItems[i] - 1]?.length > 65
+        ? `${questionList[slicedItems[i] - 1].slice(0, 61)}...`
         : questionList[slicedItems[i] - 1]
     );
     innerLi.setAttribute("flow", "up");
