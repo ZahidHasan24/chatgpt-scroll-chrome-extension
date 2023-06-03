@@ -143,7 +143,7 @@ const main = () => {
 
 const createPaginationList = () => {
   const parentDiv = document.createElement("div");
-  parentDiv.className = "flex justify-center mt-5 pagination";
+  parentDiv.className = "flex justify-center mb-5 pagination";
   parentDiv.innerHTML = `
   <nav class="flex">
     <ul class="flex items-center"></ul>
