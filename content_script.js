@@ -94,6 +94,9 @@ style.innerHTML = `
   `;
 document.head.appendChild(style);
 
+const chatQuestionsClassName =
+  ".group.w-full.text-token-text-primary.border-b.border-black\\/10.dark\\:border-gray-900\\/50.dark\\:bg-gray-800";
+
 const init = () => {
   if (window.buttonsInterval) {
     clearInterval(window.buttonsInterval);
@@ -123,15 +126,12 @@ const isResponseGenerating = () => {
 const main = () => {
   const innerItems = [];
   const quesList = [];
-  document
-    .querySelectorAll(
-      ".w-full.border-b.border-black\\/10.dark\\:border-gray-900\\/50.text-gray-800.dark\\:text-gray-100.group.dark\\:bg-gray-800"
-    )
-    .forEach((item, index) => {
-      item.classList.add(`question-${index + 1}`);
-      innerItems.push(index + 1);
-      quesList.push(item?.innerText);
-    });
+
+  document.querySelectorAll(chatQuestionsClassName).forEach((item, index) => {
+    item.classList.add(`question-${index + 1}`);
+    innerItems.push(index + 1);
+    quesList.push(item?.innerText);
+  });
 
   items = innerItems;
   questionList = quesList;
@@ -265,9 +265,9 @@ const shouldRemovePagination = () => {
 
 const shouldAddPagination = () => {
   const isTherePagination = document.querySelector(".pagination");
-  const isThereChat = document.querySelectorAll(
-    ".w-full.border-b.border-black\\/10.dark\\:border-gray-900\\/50.text-gray-800.dark\\:text-gray-100.group.dark\\:bg-gray-800"
-  );
+
+  const isThereChat = document.querySelectorAll(chatQuestionsClassName);
+
   if (isTherePagination === null && isThereChat?.length > 0) {
     return true;
   }
