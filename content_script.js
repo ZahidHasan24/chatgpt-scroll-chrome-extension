@@ -3,6 +3,8 @@ let questionList = [];
 let currentPage = 0;
 let showPages = 10;
 let generateResponse = -1;
+const classNameForQuestion =
+  ".w-full.text-token-text-primary.border-b.border-black\\/10.gizmo\\:border-0.dark\\:border-gray-900\\/50.gizmo\\:dark\\:border-0.gizmo\\:bg-transparent.dark\\:bg-gray-800.gizmo\\:dark\\:bg-transparent";
 
 var style = document.createElement("style");
 style.innerHTML = `
@@ -94,9 +96,6 @@ style.innerHTML = `
   `;
 document.head.appendChild(style);
 
-const chatQuestionsClassName =
-  ".group.w-full.text-token-text-primary.border-b.border-black\\/10.dark\\:border-gray-900\\/50.dark\\:bg-gray-800";
-
 const init = () => {
   if (window.buttonsInterval) {
     clearInterval(window.buttonsInterval);
@@ -126,8 +125,7 @@ const isResponseGenerating = () => {
 const main = () => {
   const innerItems = [];
   const quesList = [];
-
-  document.querySelectorAll(chatQuestionsClassName).forEach((item, index) => {
+  document.querySelectorAll(classNameForQuestion).forEach((item, index) => {
     item.classList.add(`question-${index + 1}`);
     innerItems.push(index + 1);
     quesList.push(item?.innerText);
@@ -143,20 +141,18 @@ const main = () => {
 
 const createPaginationList = () => {
   const parentDiv = document.createElement("div");
-  parentDiv.className = "flex justify-center mb-5 pagination";
+  parentDiv.className = "flex justify-center mt-3 pagination";
   parentDiv.innerHTML = `
   <nav class="flex">
     <ul class="flex items-center"></ul>
   </nav>
 `;
 
-  const childNode = document.querySelector(
-    ".px-3.pt-2.pb-3.text-center.text-xs.text-black\\/50.dark\\:text-white\\/50.md\\:px-4.md\\:pt-3.md\\:pb-6"
+  const chatBoxParent = document.querySelector(
+    ".relative.flex.h-full.flex-1.items-stretch.md\\:flex-col"
   );
 
-  document
-    ?.querySelector(".absolute.bottom-0")
-    ?.insertBefore(parentDiv, childNode);
+  chatBoxParent.appendChild(parentDiv);
 
   const paginationList = document.querySelector("nav ul");
 
@@ -181,7 +177,7 @@ const createPaginationList = () => {
     span.innerHTML = item;
     li.appendChild(span);
 
-    paginationList.appendChild(li);
+    paginationList?.appendChild(li);
   });
   currentPage = 0;
 };
@@ -194,7 +190,7 @@ const addNextButton = () => {
   nextButton.innerText = "Next";
   nextButton.disabled = currentPage >= items.length - showPages;
   nextButton.addEventListener("click", handleNextButton);
-  parentDiv.append(nextButton);
+  parentDiv?.append(nextButton);
 };
 
 const addPrevButton = () => {
@@ -205,7 +201,7 @@ const addPrevButton = () => {
   prevButton.innerText = "Prev";
   prevButton.disabled = currentPage === 0;
   prevButton.addEventListener("click", handlePrevButton);
-  parentDiv.prepend(prevButton);
+  parentDiv?.prepend(prevButton);
 };
 
 const handlePagination = (isNext) => {
@@ -254,7 +250,9 @@ const scrollToView = (event) => {
 };
 
 const shouldRemovePagination = () => {
-  const isThereSpinner = document.querySelector(".animate-spin");
+  const isThereSpinner = document.querySelector(
+    '[aria-label="Stop generating"]'
+  );
 
   if (isThereSpinner !== null) {
     return true;
@@ -266,11 +264,14 @@ const shouldRemovePagination = () => {
 const shouldAddPagination = () => {
   const isTherePagination = document.querySelector(".pagination");
 
-  const isThereChat = document.querySelectorAll(chatQuestionsClassName);
+  const isThereChat = document.querySelectorAll(
+    ".flex.flex-col.text-sm.gizmo\\:pb-9.dark\\:bg-gray-800.gizmo\\:dark\\:bg-transparent"
+  );
 
   if (isTherePagination === null && isThereChat?.length > 0) {
     return true;
   }
+
   return false;
 };
 
