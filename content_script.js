@@ -105,7 +105,6 @@ const init = () => {
       return;
     }
     if (shouldAddPagination()) {
-      console.log("main");
       main();
     }
     if (shouldRemovePagination() || isResponseGenerating()) {
@@ -126,7 +125,6 @@ const main = () => {
   const innerItems = [];
   const quesList = [];
   document.querySelectorAll(classNameForQuestion).forEach((item, index) => {
-    console.log(item);
     item.classList.add(`question-${index + 1}`);
     innerItems.push(index + 1);
     quesList.push(item?.innerText);
@@ -134,8 +132,6 @@ const main = () => {
 
   items = innerItems;
   questionList = quesList;
-
-  // console.log(innerItems, quesList);
 
   createPaginationList();
   addNextButton();
@@ -266,7 +262,16 @@ const shouldRemovePagination = () => {
 
 const shouldAddPagination = () => {
   const isTherePagination = document.querySelector(".pagination");
-  const isThereChat = document.querySelectorAll(".flex-1.overflow-hidden");
+  // Define a regular expression to match elements with data-testid="conversation-turn-{number}"
+  const regex = /^conversation-turn-\d+$/;
+
+  // Query all elements with data-testid attribute
+  const elements = document.querySelectorAll("[data-testid]");
+
+  // Check if any of the elements match the pattern
+  const isThereChat = Array.from(elements).filter((element) =>
+    regex.test(element.getAttribute("data-testid"))
+  );
 
   if (isTherePagination === null && isThereChat?.length > 0) {
     return true;
