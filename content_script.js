@@ -3,9 +3,8 @@ let questionList = [];
 let currentPage = 0;
 let showPages = 10;
 let generateResponse = -1;
-const classNameForQuestion =
-  ".w-full.text-token-text-primary.border-b.border-black\\/10.gizmo\\:border-0.dark\\:border-gray-900\\/50.gizmo\\:dark\\:border-0.gizmo\\:bg-transparent.dark\\:bg-gray-800.gizmo\\:dark\\:bg-transparent";
 
+const classNameForQuestion = '[data-message-author-role="user"]';
 var style = document.createElement("style");
 style.innerHTML = `
 [tooltip] {
@@ -106,6 +105,7 @@ const init = () => {
       return;
     }
     if (shouldAddPagination()) {
+      console.log("main");
       main();
     }
     if (shouldRemovePagination() || isResponseGenerating()) {
@@ -126,6 +126,7 @@ const main = () => {
   const innerItems = [];
   const quesList = [];
   document.querySelectorAll(classNameForQuestion).forEach((item, index) => {
+    console.log(item);
     item.classList.add(`question-${index + 1}`);
     innerItems.push(index + 1);
     quesList.push(item?.innerText);
@@ -133,6 +134,8 @@ const main = () => {
 
   items = innerItems;
   questionList = quesList;
+
+  // console.log(innerItems, quesList);
 
   createPaginationList();
   addNextButton();
@@ -263,15 +266,11 @@ const shouldRemovePagination = () => {
 
 const shouldAddPagination = () => {
   const isTherePagination = document.querySelector(".pagination");
-
-  const isThereChat = document.querySelectorAll(
-    ".flex.flex-col.text-sm.gizmo\\:pb-9.dark\\:bg-gray-800.gizmo\\:dark\\:bg-transparent"
-  );
+  const isThereChat = document.querySelectorAll(".flex-1.overflow-hidden");
 
   if (isTherePagination === null && isThereChat?.length > 0) {
     return true;
   }
-
   return false;
 };
 
