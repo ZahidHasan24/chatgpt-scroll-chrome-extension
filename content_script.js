@@ -148,10 +148,10 @@ const createPaginationList = () => {
 `;
 
   const chatBoxParent = document.querySelector(
-    ".relative.flex.h-full.flex-1.items-stretch.md\\:flex-col"
+    "form .relative.flex.h-full.flex-1.flex-col"
   );
 
-  chatBoxParent.appendChild(parentDiv);
+  chatBoxParent?.appendChild(parentDiv);
 
   const paginationList = document.querySelector("nav ul");
 
