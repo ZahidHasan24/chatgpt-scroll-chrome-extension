@@ -147,13 +147,15 @@ const createPaginationList = () => {
   </nav>
 `;
 
-  const chatBoxParent = document.querySelector(
+  const chatBoxParent = document.querySelectorAll(
     "form.w-full .flex.w-full.items-center"
   );
 
-  chatBoxParent?.classList?.add("flex-col");
+  const chatBoxParentLastChild = chatBoxParent[chatBoxParent?.length - 1];
 
-  chatBoxParent.appendChild(parentDiv);
+  chatBoxParentLastChild?.classList?.add("flex-col");
+
+  chatBoxParentLastChild.appendChild(parentDiv);
 
   const paginationList = document.querySelector("nav ul");
 
