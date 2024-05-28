@@ -114,8 +114,10 @@ const init = () => {
 };
 
 const isResponseGenerating = () => {
-  const inConversation = document.querySelector("form button");
-  if (inConversation?.innerText === "Stop generating") {
+  const inConversation = document.querySelector(
+    "[data-testid='fruitjuice-stop-button']"
+  );
+  if (inConversation) {
     return true;
   }
   return false;
